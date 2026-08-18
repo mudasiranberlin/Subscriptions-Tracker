@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication</title>
+
+```
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 400px;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 20px;
+        border: none;
+        background: #007BFF;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+    .logout-btn {
+        background: #dc3545;
+    }
+
+    .logout-btn:hover {
+        background: #a71d2a;
+    }
+
+    .switch-btn {
+        background: transparent;
+        color: #007BFF;
+        margin-top: 10px;
+    }
+
+    .switch-btn:hover {
+        background: transparent;
+        color: #0056b3;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<!-- LOGIN FORM -->
+<div id="loginSection">
+
+    <h2>User Login</h2>
+
+    <form
+        action="http://localhost:8000/api/v1/users/login"
+        method="POST"
+    >
+
+        <label for="loginEmail">
+            Email or Username
+        </label>
+
+        <input
+            type="text"
+            id="loginEmail"
+            name="email"
+            placeholder="Enter email or username"
+            required
+        >
+
+        <label for="loginPassword">
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="loginPassword"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <button
+        class="switch-btn"
+        onclick="showRegister()"
+    >
+        Don't have an account? Create Account
+    </button>
+
+    <form
+        action="http://localhost:8000/api/v1/users/logout"
+        method="POST"
+    >
+
+        <button
+            type="submit"
+            class="logout-btn"
+        >
+            Logout
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- REGISTER FORM -->
+<div id="registerSection" class="hidden">
+
+    <h2>Create Account</h2>
+
+    <form
+        action="http://localhost:8000/api/v1/users/register"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+
+        <label for="fullname">
+            Full Name
+        </label>
+
+        <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <label for="username">
+            Username
+        </label>
+
+        <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+        >
+
+        <label for="registerEmail">
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="registerEmail"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label for="registerPassword">
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="registerPassword"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+        <label for="avatar">
+            Avatar Image
+        </label>
+
+        <input
+            type="file"
+            id="avatar"
+            name="avatar"
+            accept="image/*"
+            required
+        >
+
+        <label for="coverImage">
+            Cover Image (Optional)
+        </label>
+
+        <input
+            type="file"
+            id="coverImage"
+            name="coverImage"
+            accept="image/*"
+        >
+
+        <button type="submit">
+            Create Account
+        </button>
+
+    </form>
+
+    <button
+        class="switch-btn"
+        onclick="showLogin()"
+    >
+        Already have an account? Login
+    </button>
+
+</div>
+```
+
+</div>
+
+<script>
+
+    function showRegister() {
+
+        document
+            .getElementById("loginSection")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("registerSection")
+            .classList
+            .remove("hidden");
+    }
+
+
+    function showLogin() {
+
+        document
+            .getElementById("registerSection")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("loginSection")
+            .classList
+            .remove("hidden");
+    }
+
+</script>
+
+</body>
+</html>
