@@ -6,11 +6,15 @@ import { ApiError } from "../utils/ApiError.js";
 
 const mailroute = asyncHandler(async (req, res) => {
 
+    const num = Math.floor(100000 + Math.random() * 900000);
+    console.log(num)
+
     const info = await sendEmail({
         to: "apple.mudasir@gmail.com",
         subject: "Hello",
-        text: "Hello world Google is Good?",
-        html: "<b>Hello world?</b>",
+        text: `Hello world Google is Good Here is your OtP:?`,
+        html: `<b>Hello world and here is your Otp?${num}</b>`,
+        // <b>Hello world and here is your OTP: {{otp}}</b>
     });
 
     if (!info) {
