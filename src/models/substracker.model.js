@@ -66,22 +66,29 @@ const SubscriptionTrack = new Schema({
 
 },{timestamps:true});
 
-SubscriptionTrack.pre(method: 'save',fn:function (next) {
-    if(!this.renewalDate){
+SubscriptionTrack.pre("save", function (next) {
+    if (!this.renewalDate) {
         const renewalPeriods = {
-            daily:1,
-            weekly:7,
-            monthly:30,
-            yearly:365
+            daily: 1,
+            weekly: 7,
+            monthly: 30,
+            yearly: 365,
         };
+
         this.renewalDate = new Date(this.startDate);
-        this.renewalDate = setDate(this.renewalDate.getDate()+renewalPeriods[this.frequency])
+
+        this.renewalDate.setDate(
+            this.renewalDate.getDate() + renewalPeriods[this.frequency]
+        );
     }
 
-    if(this.renewalDate < new Date()){
-        this.status = 'expired';
+    if (this.renewalDate < new Date()) {
+        this.status = "expired";
     }
-    next()
-})
+
+    next();
+});
+
+
 
 export const Track = mongoose.model("Track",SubscriptionTrack)
