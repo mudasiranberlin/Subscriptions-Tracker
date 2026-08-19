@@ -8,7 +8,27 @@ import mongoose from "mongoose";
 import {Track} from "../models/substracker.model.js"
 
 const subAlldetails = asyncHandler(async(req,res)=>{
-    console.log("Reached");
+    console.log("Reached333");
+
+
+    if (req.user.id != req.params.id) {
+        throw new ApiError(202,"Invalid you are not the owner")
+    }
+   const sub = await Track.find(
+    {
+        user:req.params.id
+    }
+   )
+
+   return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,sub,"Data fetched sucessfully"
+            )
+        )
+    
+    
     
 
 })

@@ -4,7 +4,7 @@ import { verfiyJWT } from "../middlewares/auth.middleware.js";
 import {subAlldetails,createSubs} from "../controllers/subscription.controller.js"
 
 const router = Router()
-    router.route("/").get(subAlldetails)
+    router.route("/user/:id").get(verfiyJWT,subAlldetails)
     // router.route("/:id").get(getsub)
     router.route("/").post(verfiyJWT,createSubs)
     // router.route("/:id").put(updateSub)

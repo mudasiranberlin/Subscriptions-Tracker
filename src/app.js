@@ -55,11 +55,16 @@ import videoRouter from "./routes/video.routes.js"
 
 import substrack from "./routes/subscription.routes.js"
 
+// import workflow from "./routes/workflow.routes.js"
+
+import mailroute from "./routes/mail.router.js"
+
 app.use("/api/v1/users",userRouter)
 app.use("/api/v1/videos",videoRouter)
 
 app.use("/api/v1/subs",substrack)
 
-
+app.use("/api/v1/subs",mailroute)
+// app.use("/api/v1/workflow",workflow)
 
 export default app

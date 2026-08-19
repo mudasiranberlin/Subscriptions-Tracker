@@ -25,7 +25,7 @@ const SubscriptionTrack = new Schema({
     },
     category:{
         type:String,
-        enum:['sports','news','entertainment','lifestyle','finance'],
+        enum:['sports','news','Entertainment','lifestyle','finance'],
         required:true
     },
     paymentmethod:{
@@ -48,7 +48,7 @@ const SubscriptionTrack = new Schema({
     },
     renewalDate:{
         type:Date,
-        required:true,
+        // required:true,
         validate:{
             validator:function (value) {
                 return value > this.startDate;
@@ -66,7 +66,7 @@ const SubscriptionTrack = new Schema({
 
 },{timestamps:true});
 
-SubscriptionTrack.pre("save", function (next) {
+SubscriptionTrack.pre("save", function () {
     if (!this.renewalDate) {
         const renewalPeriods = {
             daily: 1,
@@ -85,10 +85,7 @@ SubscriptionTrack.pre("save", function (next) {
     if (this.renewalDate < new Date()) {
         this.status = "expired";
     }
-
-    next();
 });
-
 
 
 export const Track = mongoose.model("Track",SubscriptionTrack)
