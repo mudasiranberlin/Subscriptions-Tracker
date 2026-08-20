@@ -6,6 +6,8 @@ import { ApiError } from "../utils/ApiError.js";
 
 const mailroute = asyncHandler(async (req, res) => {
 
+    
+
     const num = Math.floor(100000 + Math.random() * 900000);
     console.log(num)
 
